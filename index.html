@@ -14,7 +14,7 @@
 
 <body>
     <div id="app">
-        <user-modal :temp-product="tempProduct" :add-to-cart="addToCart" ref="userModal"></user-modal>
+        <user-modal :temp-product="tempProduct" :status="status" :add-to-cart="addToCart" ref="userModal"></user-modal>
         <div class="container">
             <div class="mt-4">
                 <!-- 產品Modal -->
@@ -218,18 +218,11 @@
                         <select name="" id="" class="form-select" v-model="qty">
                             <option :value="i" v-for="i in 20" :key="i">{{i}}</option>
                         </select>
-                        <button type="button" class="btn btn-primary"                      
-                        @click="addToCart(tempProduct.id, qty)">
-                            加入購物車</button>
-
-                        <!-- modal內想如同「加到購物車」按鈕一樣，點下時產生loading效果，但下面寫法卻沒反應，報錯can not read properties of undefined "addCartLoading"
-                        所以在想是不是因為寫在子元件裡所已讀不到。在index.js中userModal的子元件內定義status卻一樣沒反應，watch效果也消失了。modal內的「加入購物車」button 要怎樣才能如外層一樣有loading效果呢？-->
-                        
-                        <!-- <button type="button" class="btn btn-primary" 
+                        <button type="button" class="btn btn-primary" 
                         :disabled="tempProduct.id === status.addCartLoading"
                         @click="addToCart(tempProduct.id, qty)">
                         <span class="fas fa-spinner fa-pulse" aria-hidden="true"
-                            v-if="tempProduct.id === status.addCartLoading"></span>加入購物車</button> -->
+                        v-if="tempProduct.id === status.addCartLoading"></span>加入購物車</button>
               </div>
               </div>
               </div>

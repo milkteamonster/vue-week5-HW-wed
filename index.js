@@ -1,5 +1,3 @@
-// import userProductModal from "./userProductModal.js";
-
 // 全部規則
 Object.keys(VeeValidateRules).forEach(rule => {
     if (rule !== 'default') {
@@ -20,14 +18,11 @@ const apiUrl = 'https://vue3-course-api.hexschool.io/v2';
 const apiPath = 'milktea';
 
 const userModal = {
-    props: ['tempProduct', 'addToCart'],
+    props: ['tempProduct', 'addToCart', 'status'],
     data(){
         return{
             productModal: null,
             qty: 1,
-            status: {  
-                addCartLoading: '',
-            },
         }
     },
     methods:{
@@ -140,12 +135,15 @@ const app = Vue.createApp({
             const order = this.form;
             axios.post(`${apiUrl}/api/${apiPath}/order`, {data: order})
             .then((res) => {
-                alert(res.data.message)
+                alert(res.data.message);
+                this.form.message = '';
                 this.$refs.form.resetForm();
                 this.getCart();
             })
             .catch((err) => {
                 alert(err.response.data.message);
+                this.form.message = '';
+                this.$refs.form.resetForm();
             });
         },    
     },
